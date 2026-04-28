@@ -2,7 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "search.js": {
-      "runtime": "nodejs18.x",
       "memory": 1024,
       "maxDuration": 10
     }
@@ -16,8 +15,8 @@
         { "key": "Access-Control-Allow-Headers", "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
         { "key": "Cache-Control", "value": "s-maxage=300, stale-while-revalidate" },
-        { "key": "Author", "value": "Jr Busaco" },
-        { "key": "Github", "value": "https://github.com/JrDevProgect/audio" }
+        { "key": "Author", "value": "itsmejrb" },
+        { "key": "Github", "value": "https://github.com/itsmejrb/auraly" }
       ]
     }
   ]
