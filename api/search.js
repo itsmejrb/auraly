@@ -29,19 +29,46 @@ function getImages(link) {
   }));
 }
 
+function mapArtist(a) {
+  return {
+    id: a.id,
+    name: a.name,
+    role: a.role,
+    image: getImages(a.image),
+    type: a.type,
+    url: a.perma_url,
+  };
+}
+
 function toSong(s) {
   const m = s.more_info || {};
   return {
     id: s.id,
     name: s.title,
+    type: s.type,
+    year: s.year || null,
+    releaseDate: m.release_date || null,
     duration: m.duration ? Number(m.duration) : null,
-    album: { name: m.album, id: m.album_id },
-    artists: (m.artistMap?.primary_artists || []).map((a) => ({ name: a.name, id: a.id })),
+    label: m.label || null,
+    explicitContent: s.explicit_content === "1",
+    playCount: s.play_count ? Number(s.play_count) : null,
+    language: s.language,
+    hasLyrics: m.has_lyrics === "true",
+    lyricsId: m.lyrics_id || null,
+    url: s.perma_url,
+    copyright: m.copyright_text || null,
+    album: {
+      id: m.album_id || null,
+      name: m.album || null,
+      url: m.album_url || null,
+    },
+    artists: {
+      primary: (m.artistMap?.primary_artists || []).map(mapArtist),
+      featured: (m.artistMap?.featured_artists || []).map(mapArtist),
+      all: (m.artistMap?.artists || []).map(mapArtist),
+    },
     image: getImages(s.image),
     downloadUrl: decryptUrl(m.encrypted_media_url),
-    url: s.perma_url,
-    year: s.year || null,
-    explicit: s.explicit_content === "1",
   };
 }
 
