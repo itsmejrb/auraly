@@ -1,12 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "functions": {
-    "search.js": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  },
   "regions": ["bom1"],
+  "rewrites": [
+    { "source": "/search", "destination": "/api/search" }
+  ],
   "headers": [
     {
       "source": "/search",
